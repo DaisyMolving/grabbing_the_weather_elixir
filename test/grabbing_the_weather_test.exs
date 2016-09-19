@@ -8,6 +8,10 @@ defmodule GrabbingTheWeatherTest do
   end
 
   test "makes http request for json weather data" do
-    assert Map.has_key?(GrabbingTheWeather.http_request_data("london"), :body)
+    assert GrabbingTheWeather.http_request_data("london") =~ "weather"
+  end
+
+  test "accesses city name and weather description" do
+    assert GrabbingTheWeather.find_name_and_description("london") == {"London", "overcast clouds"}
   end
 end
