@@ -2,6 +2,10 @@ defmodule GrabbingTheWeather do
   @derive [Poison.Encoder]
   require HTTPoison
 
+  def print_current_weather_message(city) do
+    IO.puts("The weather in #{find_name(city)} today is #{find_weather_description(city)}")
+  end
+
   def find_name_and_description(city) do
     {find_name(city), find_weather_description(city)}
   end
@@ -27,7 +31,11 @@ defmodule GrabbingTheWeather do
   end
 
   def create_url(city) do
-    "http://api.openweathermap.org/data/2.5/weather?q=i#{city}&appid=#{System.get_env("WEATHER_API_KEY")}"
+    "http://api.openweathermap.org/data/2.5/weather?q=i#{remove_spaces(city)}&appid=#{System.get_env("WEATHER_API_KEY")}"
+  end
+
+  def remove_spaces(city) do
+    String.replace(city, " ", "")
   end
 
 end
