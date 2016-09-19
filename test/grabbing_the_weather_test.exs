@@ -12,10 +12,6 @@ defmodule GrabbingTheWeatherTest do
     assert GrabbingTheWeather.http_request_data("london") =~ "weather"
   end
 
-  test "accesses city name and weather description" do
-    assert GrabbingTheWeather.find_name_and_description("london") == {"London", "overcast clouds"}
-  end
-
   test "prints message about the weather in chosen city today" do
     assert capture_io(fn ->
       GrabbingTheWeather.print_current_weather_message("addis ababa")
