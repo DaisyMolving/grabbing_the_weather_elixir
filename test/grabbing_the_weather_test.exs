@@ -15,6 +15,6 @@ defmodule GrabbingTheWeatherTest do
   test "prints message about the weather in chosen city today" do
     assert capture_io(fn ->
       GrabbingTheWeather.print_current_weather_message("addis ababa")
-    end) =~ "The weather in Ādīs Ābeba Āstedader today is"
+    end) =~ "The temperature in Ādīs Ābeba Āstedader today is"
   end
 end
