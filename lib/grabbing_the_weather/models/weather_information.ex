@@ -1,5 +1,5 @@
 defmodule GrabbingTheWeather.WeatherInformation do
-  use Ecto.Model
+  use Ecto.Schema
 
   schema "weather_information" do
     timestamps

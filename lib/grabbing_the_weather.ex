@@ -3,22 +3,17 @@ defmodule GrabbingTheWeather do
   @derive [Poison.Encoder]
   require HTTPoison
 
-  # See http://elixir-lang.org/docs/stable/elixir/Application.html
-  # for more information on OTP Applications
   def start(_type, _args) do
     import Supervisor.Spec, warn: false
-
-    # Define workers and child supervisors to be supervised
     children = [
       supervisor(GrabbingTheWeather.Repo, [])
-      # Starts a worker by calling: GlobalWeatherService.Worker.start_link(arg1, arg2, arg3)
-      # worker(GlobalWeatherService.Worker, [arg1, arg2, arg3]),
     ]
-
-    # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
-    # for other strategies and supported options
     opts = [strategy: :one_for_one, name: GrabbingTheWeather.Supervisor]
     Supervisor.start_link(children, opts)
+  end
+
+  def insert_weather_information(city) do
+    GrabbingTheWeather.Repo.insert %GrabbingTheWeather.WeatherInformation{city: find_name(city), temperature: find_temperature(city), description: find_weather_description(city)}
   end
 
   def print_current_weather_message(city) do
