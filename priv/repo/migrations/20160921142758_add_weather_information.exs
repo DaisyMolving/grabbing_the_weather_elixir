@@ -4,7 +4,7 @@ defmodule GrabbingTheWeather.Repo.Migrations.AddWeatherInformation do
   def change do
     create table(:weather_information) do
       add :city, :string
-      add :temperature, :integer
+      add :temperature, :decimal
       add :description, :string
 
       timestamps
