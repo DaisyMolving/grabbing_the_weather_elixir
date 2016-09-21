@@ -5,8 +5,8 @@ use Mix.Config
 config :grabbing_the_weather, GrabbingTheWeather.Repo,
   adapter: Ecto.Adapters.Postgres,
   database: "grabbing_the_weather_repo",
-  username: "user",
-  password: "pass",
+  username: "postgres",
+  password: "postgres",
   hostname: "localhost"
 
 
