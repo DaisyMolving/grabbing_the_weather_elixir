@@ -2,6 +2,14 @@
 # and its dependencies with the aid of the Mix.Config module.
 use Mix.Config
 
+config :grabbing_the_weather, GrabbingTheWeather.Repo,
+  adapter: Ecto.Adapters.Postgres,
+  database: "grabbing_the_weather_repo",
+  username: "user",
+  password: "pass",
+  hostname: "localhost"
+
+
 # This configuration is loaded before any dependency and is restricted
 # to this project. If another project depends on this project, this
 # file won't be loaded nor affect the parent project. For this reason,
@@ -10,7 +18,12 @@ use Mix.Config
 
 # You can configure for your application as:
 #
-#     config :grabbing_the_weather, key: :value
+    config :grabbing_the_weather, 
+    ecto_repos: [GrabbingTheWeather.Repo],
+    adapter: Ecto.Adapters.Postgres,
+    database: "weather",
+    username: "postgres",
+    password: "postgres"
 #
 # And access this configuration in your application as:
 #
