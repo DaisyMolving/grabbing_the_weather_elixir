@@ -1,6 +1,7 @@
 defmodule GrabbingTheWeather do
   use Application
   @derive [Poison.Encoder]
+  import Ecto.Query, only: [from: 2]
   require HTTPoison
 
   def start(_type, _args) do
@@ -14,6 +15,13 @@ defmodule GrabbingTheWeather do
 
   def insert_weather_information(city) do
     GrabbingTheWeather.Repo.insert! %GrabbingTheWeather.WeatherInformation{city: find_name(city), temperature: find_temperature(city), description: find_weather_description(city)}
+  end
+
+  def get_city_temperatures(city) do
+    query = from w in "weather_information", 
+            where: w.city == ^String.capitalize(find_name(city)),
+            select: w.temperature
+    GrabbingTheWeather.Repo.all(query)
   end
 
   def print_current_weather_message(city) do
