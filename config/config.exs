@@ -24,7 +24,7 @@ config :grabbing_the_weather, GrabbingTheWeather.Repo,
     database: "weather",
     username: "postgres",
     password: "postgres"
-#
+
 # And access this configuration in your application as:
 #
 #     Application.get_env(:grabbing_the_weather, :key)
@@ -41,3 +41,4 @@ config :grabbing_the_weather, GrabbingTheWeather.Repo,
 # here (which is why it is important to import them last).
 #
 #     import_config "#{Mix.env}.exs"
+

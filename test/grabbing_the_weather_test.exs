@@ -1,7 +1,6 @@
 defmodule GrabbingTheWeatherTest do
   use ExUnit.Case
   import ExUnit.CaptureIO
-  doctest GrabbingTheWeather
 
   test "creates the correct url with environment variable stored key" do
     assert GrabbingTheWeather.create_url("addis ababa") =~ "addisababa"

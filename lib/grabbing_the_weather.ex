@@ -13,7 +13,7 @@ defmodule GrabbingTheWeather do
   end
 
   def insert_weather_information(city) do
-    GrabbingTheWeather.Repo.insert %GrabbingTheWeather.WeatherInformation{city: find_name(city), temperature: find_temperature(city), description: find_weather_description(city)}
+    GrabbingTheWeather.Repo.insert! %GrabbingTheWeather.WeatherInformation{city: find_name(city), temperature: find_temperature(city), description: find_weather_description(city)}
   end
 
   def print_current_weather_message(city) do
