@@ -17,11 +17,27 @@ defmodule GrabbingTheWeather do
     GrabbingTheWeather.Repo.insert! %GrabbingTheWeather.WeatherInformation{city: find_name(city), temperature: find_temperature(city), description: find_weather_description(city)}
   end
 
+  def print_average_temperature(city) do
+    IO.puts "The average temperature in #{find_name(city)} is #{
+     get_city_temperatures(city)
+     |> get_average_temperature}ºC"
+  end
+
   def get_city_temperatures(city) do
     query = from w in "weather_information", 
             where: w.city == ^String.capitalize(find_name(city)),
             select: w.temperature
     GrabbingTheWeather.Repo.all(query)
+  end
+
+  def get_average_temperature(list_of_temperatures) do
+    sum_of_temperatures(list_of_temperatures) / Enum.count(list_of_temperatures)
+    |> Float.round(1)
+  end
+
+  defp sum_of_temperatures([]), do: 0
+  defp sum_of_temperatures([current_temp | next_temps]) do
+    elem(Float.parse(current_temp), 0) + sum_of_temperatures(next_temps)
   end
 
   def print_current_weather_message(city) do

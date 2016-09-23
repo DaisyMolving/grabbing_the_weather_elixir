@@ -17,8 +17,13 @@ defmodule GrabbingTheWeatherTest do
     end) =~ "The temperature in Ādīs Ābeba Āstedader today is"
   end
 
-  test "gets stored temperatures for london" do
-    assert GrabbingTheWeather.get_city_temperatures("london") == ["19.2ºC", "19.8ºC", "18.6ºC"]
-    assert GrabbingTheWeather.get_city_temperatures("berlin") == ["23.9ºC"]
+  test "takes average temperature from list of temperatures" do
+    assert GrabbingTheWeather.get_average_temperature(["19.2ºC", "19.8ºC", "18.6ºC"]) == 19.2
+  end
+
+  test "prints average temperature in given city" do
+    assert capture_io(fn ->
+      GrabbingTheWeather.print_average_temperature("auckland")
+    end) =~ "The average temperature in Auckland is" 
   end
 end
