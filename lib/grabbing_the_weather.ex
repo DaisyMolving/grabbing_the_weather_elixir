@@ -58,27 +58,27 @@ defmodule GrabbingTheWeather do
   end
 
   defp find_tomorrow_temperature(city) do
-    find_key_from_body(city, "list")
-    |> Enum.at(1)
-    |> Map.fetch!("temp")
-    |> Map.fetch!("day")
-    |> Float.round(1)
+    locate_temperature(city, 1)
   end
 
   defp find_current_temperature(city) do
-    find_key_from_body(city, "list")
-    |> List.first
-    |> Map.fetch!("temp")
-    |> Map.fetch!("day")
-    |> Float.round(1)
+    locate_temperature(city, 0)
   end
 
   defp find_weather_description(city) do
     find_key_from_body(city, "list")
-    |> List.first
+    |> Enum.at(0)
     |> Map.fetch!("weather")
     |> List.first
     |> Map.fetch!("description")
+  end
+
+  defp locate_temperature(city, day) do
+    find_key_from_body(city, "list")
+    |> Enum.at(day)
+    |> Map.fetch!("temp")
+    |> Map.fetch!("day")
+    |> Float.round(1)
   end
 
   defp find_name(city) do
