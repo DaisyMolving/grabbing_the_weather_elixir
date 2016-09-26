@@ -13,8 +13,8 @@ defmodule GrabbingTheWeatherTest do
 
   test "prints message about the weather in chosen city today" do
     assert capture_io(fn ->
-      GrabbingTheWeather.print_current_weather_message("addis ababa")
-    end) =~ "The temperature in Ādīs Ābeba Āstedader today is"
+      GrabbingTheWeather.print_current_weather_message("london")
+    end) =~ "The temperature in London today is "
   end
 
   test "takes average temperature from list of temperatures" do
@@ -23,7 +23,14 @@ defmodule GrabbingTheWeatherTest do
 
   test "prints average temperature in given city" do
     assert capture_io(fn ->
-      GrabbingTheWeather.print_average_temperature("auckland")
-    end) =~ "The average temperature in Auckland is" 
+      GrabbingTheWeather.print_average_temperature("london")
+    end) =~ "The average temperature in London is" 
   end
+
+  test "prints tomorrow's temperature in given city" do
+    assert capture_io(fn ->
+      GrabbingTheWeather.print_tomorrow_temperature("london")
+    end) =~ "Tomorrow, the temperature in London will be" 
+  end
+
 end
