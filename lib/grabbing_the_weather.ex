@@ -25,7 +25,7 @@ defmodule GrabbingTheWeather do
 
   def get_city_temperatures(city) do
     query = from w in "weather_information", 
-            where: w.city == ^String.capitalize(find_name(city)),
+            where: w.city == ^find_name(city),
             select: w.temperature
     GrabbingTheWeather.Repo.all(query)
   end
