@@ -4,7 +4,7 @@ defmodule GrabbingTheWeather.WeatherInformation do
   schema "weather_information" do
     timestamps
     field :city, :string
-    field :temperature, :string
+    field :temperature, :float
     field :description, :string
   end
 

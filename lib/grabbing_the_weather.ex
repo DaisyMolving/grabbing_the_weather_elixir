@@ -41,7 +41,7 @@ defmodule GrabbingTheWeather do
 
   defp sum_of_temperatures([]), do: 0
   defp sum_of_temperatures([current_temp | next_temps]) do
-    elem(Float.parse(current_temp), 0) + sum_of_temperatures(next_temps)
+    current_temp + sum_of_temperatures(next_temps)
   end
 
   def print_current_weather_message(city) do

@@ -18,7 +18,7 @@ defmodule GrabbingTheWeatherTest do
   end
 
   test "takes average temperature from list of temperatures" do
-    assert GrabbingTheWeather.get_average_temperature(["19.2ºC", "19.8ºC", "18.6ºC"]) == 19.2
+    assert GrabbingTheWeather.get_average_temperature([19.2, 19.8, 18.6]) == 19.2
   end
 
   test "prints average temperature in given city" do

@@ -9,6 +9,7 @@ config :grabbing_the_weather, GrabbingTheWeather.Repo,
   password: "postgres",
   hostname: "localhost"
 
+  config :grabbing_the_weather, ecto_repos: [GrabbingTheWeather.Repo]
 # And access this configuration in your application as:
 #
 #     Application.get_env(:grabbing_the_weather, :key)
