@@ -12,19 +12,46 @@ defmodule GrabbingTheWeatherTest do
     end) =~ "The temperature in London today is "
   end
 
-  test "takes average temperature from list of temperatures" do
-    assert GrabbingTheWeather.calculate_average_temperature([19.2, 19.8, 18.6]) == 19.2
+  test "retrieves temperatures from the database" do
+    GrabbingTheWeather.Repo.insert! %GrabbingTheWeather.WeatherInformation{
+      city: "London",
+      temperature: 30.0, 
+      description: "Sunny"
+    }
+    GrabbingTheWeather.Repo.insert! %GrabbingTheWeather.WeatherInformation{
+      city: "London",
+      temperature: 18.5,
+      description: "Cloudy"
+    }
+    GrabbingTheWeather.Repo.insert! %GrabbingTheWeather.WeatherInformation{
+      city: "London",
+      temperature: 10.5,
+      description: "Light Rain"
+    }
+
+    assert GrabbingTheWeather.get_city_temperatures("london") == [30.0, 18.5, 10.5]
   end
 
   test "prints average temperature in given city" do
     GrabbingTheWeather.Repo.insert! %GrabbingTheWeather.WeatherInformation{
-      city: "London", 
-      temperature: 18.5, 
-      description: "cloudy skies"}
+      city: "London",
+      temperature: 30.0, 
+      description: "Sunny"
+    }
+    GrabbingTheWeather.Repo.insert! %GrabbingTheWeather.WeatherInformation{
+      city: "London",
+      temperature: 18.5,
+      description: "Cloudy"
+    }
+    GrabbingTheWeather.Repo.insert! %GrabbingTheWeather.WeatherInformation{
+      city: "London",
+      temperature: 10.5,
+      description: "Light Rain"
+    }
 
     assert capture_io(fn ->
       GrabbingTheWeather.print_average_temperature("london")
-    end) =~ "The average temperature in London is 18.5ºC" 
+    end) =~ "The average temperature in London is 19.7ºC" 
   end
 
   test "prints tomorrow's temperature in given city" do
