@@ -38,7 +38,7 @@ defmodule GrabbingTheWeather do
     GrabbingTheWeather.Repo.all(query)
   end
 
-  def calculate_average_temperature(list_of_temperatures) do
+  defp calculate_average_temperature(list_of_temperatures) do
     sum_of_temperatures(list_of_temperatures) / Enum.count(list_of_temperatures)
     |> Float.round(1)
   end
