@@ -48,30 +48,31 @@ defmodule GrabbingTheWeather do
     current_temp + sum_of_temperatures(next_temps)
   end
 
-  defp find_tomorrow_temperature(city) do
-    locate_temperature(city, 1)
+  defp find_name(city) do
+    parse_json_data(city)["city"]["name"]
   end
 
   defp find_current_temperature(city) do
-    locate_temperature(city, 0)
+    Enum.at(parse_json_data(city)["list"], 0)
+    |> locate_temperature
   end
 
   defp find_current_weather_description(city) do
-    locate_weather_information(city, 0)
+    Enum.at(parse_json_data(city)["list"], 0)
+    |> locate_weather_information
   end
 
-  defp locate_weather_information(city, day) do
-    date_searched = Enum.at(parse_json_data(city)["list"], day)
+  defp find_tomorrow_temperature(city) do
+    Enum.at(parse_json_data(city)["list"], 1)
+    |> locate_temperature
+  end
+
+  defp locate_weather_information(date_searched) do
     List.first(date_searched["weather"])["description"]
   end
 
-  defp locate_temperature(city, day) do
-    date_searched = Enum.at(parse_json_data(city)["list"], day)
+  defp locate_temperature(date_searched) do
     Float.round(date_searched["temp"]["day"], 1)
-  end
-
-  defp find_name(city) do
-    parse_json_data(city)["city"]["name"]
   end
 
   defp parse_json_data(city) do
