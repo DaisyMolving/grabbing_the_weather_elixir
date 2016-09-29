@@ -13,26 +13,26 @@ defmodule GrabbingTheWeather do
   end
 
   def print_current_weather_message(city) do
-    IO.puts("The temperature in #{find_name(city)} today is #{find_current_temperature(city)}ºC, with #{find_current_weather_description(city)}")
+    IO.puts("The temperature in #{locate_name(city)} today is #{locate_daytime_temperature(weather_today(city))}ºC, with #{locate_weather_description(weather_today(city))}")
   end
 
   def insert_weather_information(city) do
-    GrabbingTheWeather.Repo.insert! %GrabbingTheWeather.WeatherInformation{city: find_name(city), temperature: find_current_temperature(city), description: find_current_weather_description(city)}
+    GrabbingTheWeather.Repo.insert! %GrabbingTheWeather.WeatherInformation{city: locate_name(city), temperature: locate_daytime_temperature(weather_today(city)), description: locate_weather_description(weather_today(city))}
   end
 
   def print_average_temperature(city) do
-    IO.puts "The average temperature in #{find_name(city)} is #{
+    IO.puts "The average temperature in #{locate_name(city)} is #{
      get_city_temperatures(city)
      |> calculate_average_temperature}ºC"
   end
 
   def print_tomorrow_temperature(city) do
-    IO.puts("Tomorrow, the temperature in #{find_name(city)} will be #{find_tomorrow_temperature(city)}")
+    IO.puts("Tomorrow, the temperature in #{locate_name(city)} will be #{locate_daytime_temperature(weather_tomorrow(city))}")
   end
 
   def get_city_temperatures(city) do
     query = from w in "weather_information", 
-            where: w.city == ^find_name(city),
+            where: w.city == ^locate_name(city),
             select: w.temperature
     GrabbingTheWeather.Repo.all(query)
   end
@@ -47,23 +47,16 @@ defmodule GrabbingTheWeather do
     current_temp + sum_of_temperatures(next_temps)
   end
 
-  defp find_name(city) do
+  defp locate_name(city) do
     parse_json_data(city)["city"]["name"]
   end
 
-  defp find_current_temperature(city) do
+  defp weather_today(city) do
     Enum.at(parse_json_data(city)["list"], 0)
-    |> locate_daytime_temperature
   end
 
-  defp find_current_weather_description(city) do
-    Enum.at(parse_json_data(city)["list"], 0)
-    |> locate_weather_description
-  end
-
-  defp find_tomorrow_temperature(city) do
+  defp weather_tomorrow(city) do
     Enum.at(parse_json_data(city)["list"], 1)
-    |> locate_daytime_temperature
   end
 
   defp locate_weather_description(date_searched) do
