@@ -1,6 +1,5 @@
 defmodule GrabbingTheWeather do
   use Application
-  @derive [Poison.Encoder]
   import Ecto.Query, only: [from: 2]
   require HTTPoison
 
