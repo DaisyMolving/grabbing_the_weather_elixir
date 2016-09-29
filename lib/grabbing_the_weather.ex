@@ -53,7 +53,7 @@ defmodule GrabbingTheWeather do
 
   defp find_current_temperature(city) do
     Enum.at(parse_json_data(city)["list"], 0)
-    |> locate_temperature
+    |> locate_daytime_temperature
   end
 
   defp find_current_weather_description(city) do
@@ -63,14 +63,14 @@ defmodule GrabbingTheWeather do
 
   defp find_tomorrow_temperature(city) do
     Enum.at(parse_json_data(city)["list"], 1)
-    |> locate_temperature
+    |> locate_daytime_temperature
   end
 
   defp locate_weather_description(date_searched) do
     List.first(date_searched["weather"])["description"]
   end
 
-  defp locate_temperature(date_searched) do
+  defp locate_daytime_temperature(date_searched) do
     Float.round(date_searched["temp"]["day"], 1)
   end
 
