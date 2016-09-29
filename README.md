@@ -1,24 +1,13 @@
 # GrabbingTheWeather
 
-**TODO: Add description**
+**An Elixir Application for Today's Weather and Tomorrow's Forecast, Around the World**
 
-## Installation
+To run:
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed as:
+Install Elixir
 
-  1. Add `grabbing_the_weather` to your list of dependencies in `mix.exs`:
+Run `mix deps.get`
 
-    ```elixir
-    def deps do
-      [{:grabbing_the_weather, "~> 0.1.0"}]
-    end
-    ```
+Run `mix weatherman "city name"`
 
-  2. Ensure `grabbing_the_weather` is started before your application:
-
-    ```elixir
-    def application do
-      [applications: [:grabbing_the_weather]]
-    end
-    ```
-
+e.g. `mix weatherman "london"`, `mix weatherman "san francisco"`
